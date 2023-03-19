@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<ctype.h>
+#define SIZE 5
+int queue[SIZE],front=0,rear=-1,c=0;
+void insert(){
+    if(c==SIZE){
+        printf("Queue is full");
+    }
+    else{
+        printf("Enter the element to be inserted: ");
+        int x;
+        scanf("%d",&x);
+        c++;
+        rear=(rear+1)%SIZE;
+        queue[rear]=x;
+    }
+}
+void delete(){
+    if(c==0){
+        printf("Queue is empty.\n");
+    }
+    else{
+        printf("Deleted element is %d.\n",queue[front]);
+        front=(front+1)%SIZE;
+        c--;
+    }
+}
+void display(){
+    if(c==0){
+        printf("Queue is empty.\n");
+    }
+    else{
+        int x=front;
+        for(int i=1;i<=c;i++){
+            printf("%d\t",queue[x]);
+            x=(x+1)%SIZE;
+        }
+    }
+}
+
+int main(){
+    int item;
+    while(1){
+        printf("\n1.Insert\n2.Delete\n3.Display\n4.Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d",&item);
+        switch(item){
+            case 1:insert();break;
+            case 2:delete();break;
+            case 3:display();break;
+            case 4:exit(0);
+        }
+    }
+}
