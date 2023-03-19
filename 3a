@@ -1,0 +1,83 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<malloc.h>
+struct node {
+    int data;
+    struct node* link;
+};
+struct node *root=NULL;
+int length(){
+    struct node* temp=root;
+    int c=1;
+    while(temp->link!=NULL){
+        c++;
+        temp=temp->link;
+    }
+    return c;
+}
+void insPos(){
+    struct node *temp,*p;
+    int loc;
+    temp=(struct node*)malloc(sizeof(struct node *));
+    printf("Enter the item");
+    scanf("%d",&temp->data);
+    temp->link=NULL;
+    printf("Enter the location to be inserted: ");
+    scanf("%d",&loc);
+    if(loc==1){
+        temp->link=root;
+        root=temp;
+    }
+    else if(loc>length()||loc==0){
+        printf("Invalid location.\n");
+    }
+    
+    else{
+        p=root;
+        for(int i=1;i<loc-1;i++){
+            p=p->link;
+        }
+        temp->link=p->link;
+        p->link=temp;   
+    }
+}
+void delete(){
+    struct node*temp=root;
+    if(root==NULL){
+        printf("List is empty.\n");
+    }
+    else{
+        printf("Item deleted is %d",temp->data);
+        root=temp->link;
+        temp->link=NULL;
+        free(temp);
+    }
+}
+
+void display(){
+    if(root==NULL){
+        printf("List is empty.\n");
+    }
+    else{
+        struct node *temp=root;
+        while(temp!=NULL){
+            printf("%d\t",temp->data);
+            temp=temp->link;
+        }
+    }
+}
+
+int main(){
+    int ch;
+    while(1){
+        printf("\n1.Insert Location\n2.Delete\n3.Display\n");
+        printf("Enter choice: ");
+        scanf("%d",&ch);
+        switch (ch){
+            case 1: insPos();break;
+            case 2: delete();break;
+            case 3: display();break;
+            case 4: length();break;
+        }
+    }
+}
