@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define SIZE 100
+
+int a[SIZE], p = -1, c = 0;
+
+void bst(int ele)
+{
+    if (a[0] == (int)NULL)
+    {
+        a[0] = ele;
+        return;
+    }
+    while (a[c] != (int)NULL)
+    {
+        if (ele < a[c])
+        {
+            c = 2 * c + 1;
+        }
+        else
+        {
+            c = 2 * c + 2;
+        }
+    }
+    a[c] = ele;
+}
+
+void display()
+{
+    for (int i = 0; i < SIZE; i++)
+    {
+        if (a[i] == (int)NULL)
+        {
+            continue;
+        }
+        printf("a[%d]=%d", i, a[i]);
+    }
+}
+
+void main()
+{
+    int ch, i, j, ele;
+    for (i = 0; i < SIZE; i++)
+        a[i] = (int)NULL;
+    printf("\n1.bst\n2.display\n");
+    for (;;)
+    {
+        printf("\nEnter choice\n");
+        scanf("%d", &ch);
+        switch (ch)
+        {
+        case 1:
+            printf("\nEnter no of elements to enter\n");
+            scanf("%d", &j);
+            printf("\nEnter the array of elements\n");
+            for (i = 0; i < j; i++)
+            {
+                scanf("%d", &ele);
+                bst(ele);
+            }
+            break;
+        case 2:
+            display();
+            break;
+        case 3:
+            exit(0);
+        }
+    }
+}
